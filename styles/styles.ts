@@ -26,6 +26,14 @@ const styles = StyleSheet.create({
     color: "#00f",
     fontWeight: "bold",
     fontSize: 18,
+    marginBottom: 5,
+  },
+  background: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    top: 0,
+    height: 300,
   },
 });
 
