@@ -10,8 +10,10 @@ const ProfileScreen = (): React.JSX.Element => {
   const [name, setName] = useState("Thatchanin Moonphon");
   const [profile, setProfile] = useState(profileImage);
 
-  const handleChangeName = () => setName("New name");
-  const handleChangeImage = () => setProfile(newImage);
+  const handleChangeName = () =>
+    setName(name == "Thatchanin Moonphon" ? "Tity" : "Thatchanin Moonphon");
+  const handleChangeImage = () =>
+    setProfile(profile == profileImage ? newImage : profileImage);
   return (
     <View style={styles.container}>
       <View style={styles.profileContainer}>
@@ -20,13 +22,13 @@ const ProfileScreen = (): React.JSX.Element => {
           <Text style={styles.profileName}>{name}</Text>
           <Button
             title="change name"
-            color="#841584"
+            color="#553D36"
             onPress={handleChangeName}
           />
-          <Text>{" \n"}</Text>
+          <Text>{"\n"}</Text>
           <Button
             title="chane image"
-            color="#841584"
+            color="#553D36"
             onPress={handleChangeImage}
           />
         </View>

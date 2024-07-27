@@ -18,22 +18,15 @@ const styles = StyleSheet.create({
     width: "100%",
     padding: 20,
     borderRadius: 10,
-    backgroundColor: "#ffF",
+    backgroundColor: "#87A0B2",
     elevation: 5,
     marginTop: 50,
   },
   profileName: {
-    color: "#00f",
+    color: "#1A5319",
     fontWeight: "bold",
     fontSize: 18,
-    marginBottom: 5,
-  },
-  background: {
-    position: "absolute",
-    left: 0,
-    right: 0,
-    top: 0,
-    height: 300,
+    marginBottom: 10,
   },
 });
 
