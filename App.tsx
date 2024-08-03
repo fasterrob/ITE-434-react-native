@@ -1,11 +1,11 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { View } from 'react-native'
 import ProfileScreen from './components/ProfileScreen'
 import React from 'react'
 
-const App = ():React.JSX.Element => {
+const App = (): React.JSX.Element => {
   return (
     <View>
-      <ProfileScreen/>
+      <ProfileScreen />
     </View>
   )
 }

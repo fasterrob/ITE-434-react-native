@@ -13,7 +13,7 @@ export default AppFooter;
 
 const styles = StyleSheet.create({
   footer: {
-    backgroundColor: "#f8f8f8",
+    backgroundColor: "#cfcfcf",
     padding: 20,
     alignItems: "center",
     justifyContent: "center",
