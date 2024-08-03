@@ -2,6 +2,7 @@ import { Text, View, Image, Button } from "react-native";
 import { styles } from "../styles/styles";
 
 import React, { useState } from "react";
+import Login from "./Login";
 
 const ProfileScreen = (): React.JSX.Element => {
   const profileImage = require("../assets/profileImage.jpg");
@@ -33,6 +34,7 @@ const ProfileScreen = (): React.JSX.Element => {
           />
         </View>
       </View>
+      <Login />
     </View>
   );
 };
