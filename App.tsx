@@ -1,41 +1,17 @@
-import { Alert, TextInput, View } from "react-native";
-import { useEffect, useState } from "react";
+import { View } from "react-native";
+import ProfileScreen from "./components/ProfileScreen";
+import React from "react";
+import UseEffectExample from "./components/UseEffectExample";
+import Login from "./components/Login";
 
-import AppFooter from "./components/AppFooter";
-import AppHeader from "./components/AppHeader";
-import Content from "./components/Content";
-import { stylesPractice } from "./styles/styles";
-
-export default function App(): React.JSX.Element {
-  const [fullname, setFullname] = useState("");
-  const [message, setMessage] = useState("Message from App.tsx");
-  const [footerMessage, setFooterMessage] = useState(
-    "Thai-Nichi Institute of Technology"
-  );
-
-  useEffect(() => {
-    console.log("Component has mounted");
-  }, []);
-
-  useEffect(() => {
-    console.log(`Fullname has changed to : ${fullname}`);
-  }, [fullname]);
-
-  const handleButtonClick = () => {
-    Alert.alert("Hello", `Input your fullname:\n${fullname}`);
-  };
-
+const App = (): React.JSX.Element => {
   return (
-    <View style={stylesPractice.container}>
-      <AppHeader fullname={fullname} message={message} />
-      <Content message={message} handleButtonClick={handleButtonClick} />
-      <TextInput
-        style={stylesPractice.input}
-        placeholder="Enter your fullname"
-        value={fullname}
-        onChangeText={setFullname}
-      />
-      <AppFooter footerMessage={footerMessage} />
+    <View>
+      {/* <UseEffectExample/> */}
+      <ProfileScreen />
+      <Login />
     </View>
   );
-}
+};
+
+export default App;
