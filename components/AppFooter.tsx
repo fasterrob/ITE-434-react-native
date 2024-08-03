@@ -1,30 +1,18 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 
-const AppFooter = (): React.JSX.Element => {
+import { stylesPractice } from "../styles/styles";
+
+type AppFooterProps = {
+  footerMessage: string;
+};
+
+const AppFooter = ({ footerMessage }: AppFooterProps): React.JSX.Element => {
   return (
-    <View style={styles.footer}>
-      <Text style={styles.footerText}>Thai-Nichi Institute of Technology</Text>
+    <View style={stylesPractice.footer}>
+      <Text style={stylesPractice.footerText}>{footerMessage}</Text>
     </View>
   );
 };
 
 export default AppFooter;
-
-const styles = StyleSheet.create({
-  footer: {
-    backgroundColor: "#cfcfcf",
-    padding: 20,
-    alignItems: "center",
-    justifyContent: "center",
-    position: "absolute",
-    left: 0,
-    right: 0,
-    bottom: 0,
-  },
-  footerText: {
-    fontSize: 16,
-    fontWeight: "bold",
-    color: "#333",
-  },
-});

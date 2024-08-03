@@ -30,4 +30,75 @@ const styles = StyleSheet.create({
   },
 });
 
-export { styles };
+const stylesPractice = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 16,
+    backgroundColor: "#ffffff",
+  },
+
+  input: {
+    height: 40,
+    borderColor: "gray",
+    borderWidth: 1,
+    marginTop: 16,
+    paddingHorizontal: 8,
+    width: "80%",
+    borderRadius: 8,
+  },
+
+  //style header
+  header: {
+    backgroundColor: "#AEC6CF",
+    padding: 20,
+    paddingTop: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    position: "absolute",
+    left: 0,
+    right: 0,
+    top: 0,
+  },
+  headerText: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "#fff",
+  },
+
+  subtitleText: {
+    fontSize: 16,
+    color: "#fff",
+  },
+  //style content
+  content: {
+    // flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  text: {
+    fontSize: 16,
+    marginBottom: 8,
+    color: "#444",
+  },
+
+  //style footer
+  footer: {
+    backgroundColor: "#cfcfcf",
+    padding: 20,
+    alignItems: "center",
+    justifyContent: "center",
+    position: "absolute",
+    left: 0,
+    right: 0,
+    bottom: 0,
+  },
+  footerText: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#333",
+  },
+});
+
+export { styles, stylesPractice };
