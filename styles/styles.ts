@@ -1,6 +1,10 @@
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
+  background: {
+    backgroundColor: "#ccc",
+    height: "100%",
+  },
   container: {
     alignItems: "center",
     padding: 20,
@@ -18,12 +22,12 @@ const styles = StyleSheet.create({
     width: "100%",
     padding: 20,
     borderRadius: 10,
-    backgroundColor: "#87A0B2",
+    backgroundColor: "#fff",
     elevation: 5,
     marginTop: 50,
   },
   profileName: {
-    color: "#1A5319",
+    color: "#000",
     fontWeight: "bold",
     fontSize: 18,
     marginBottom: 10,
@@ -106,7 +110,7 @@ const stylesLogin = StyleSheet.create({
     justifyContent: "center",
     padding: 20,
     marginTop: 50,
-    backgroundColor: "#888", // ต้งัค่าสีพ้ืนหลงัเป็นสีขาว
+    backgroundColor: "#fff", // ต้งัค่าสีพ้ืนหลงัเป็นสีขาว
     borderRadius: 10, // เพิ่มความมนให้กบัขอบคอนเทนเนอร์
     elevation: 3, // เพิ่มเงาให้กบัคอนเทนเนอร์(เฉพาะ Android)
     width: "100%", // ต้งัความกวา้งของ container ให้เต็มหน้าจอ
@@ -122,4 +126,49 @@ const stylesLogin = StyleSheet.create({
   },
 });
 
-export { styles, stylesPractice, stylesLogin };
+const stylesFlatlist = StyleSheet.create({
+  container: {
+    marginTop: 50,
+  },
+  item: {
+    backgroundColor: "#f9c2ff",
+    padding: 20,
+    marginVertical: 8,
+    marginHorizontal: 16,
+  },
+  name: {
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  email: {
+    fontSize: 14,
+  },
+});
+
+const stylesFlatlistBackend = StyleSheet.create({
+  container: {
+    justifyContent: "center",
+    paddingTop: 50,
+  },
+  item: {
+    backgroundColor: "#f9c2ff",
+    padding: 20,
+    marginVertical: 8,
+    marginHorizontal: 16,
+  },
+  name: {
+    fontSize: 20,
+    fontWeight: "bold",
+  },
+  email: {
+    fontSize: 16,
+  },
+});
+
+export {
+  styles,
+  stylesPractice,
+  stylesLogin,
+  stylesFlatlist,
+  stylesFlatlistBackend,
+};

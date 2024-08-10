@@ -23,13 +23,11 @@ const ProfileScreen = (): React.JSX.Element => {
           <Text style={styles.profileName}>{name}</Text>
           <Button
             title="change name"
-            color="#553D36"
             onPress={handleChangeName}
           />
           <Text>{"\n"}</Text>
           <Button
             title="chane image"
-            color="#553D36"
             onPress={handleChangeImage}
           />
         </View>
