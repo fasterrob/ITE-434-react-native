@@ -1,14 +1,20 @@
 import { View, TextInput, Button, Alert } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { stylesLogin } from "../styles/styles";
 
 const Login = (): React.JSX.Element => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
 
+  useEffect(() => {
+    console.log(name);
+  }, [name]);
+
   const handleSubmit = () => {
     if (name === "" && email === "") {
-      Alert.alert("Alert", "Please Enter Name\nPlease Enter Email");
+      Alert.alert("Alert", "Please Enter Name\nPlease Enter Email", [
+        { text: "Ok" },
+      ]);
     } else if (name === "") {
       Alert.alert("Alert", "Please Enter Name");
     } else if (email === "") {

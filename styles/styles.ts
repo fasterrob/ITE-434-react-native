@@ -106,7 +106,7 @@ const stylesLogin = StyleSheet.create({
     justifyContent: "center",
     padding: 20,
     marginTop: 50,
-    backgroundColor: "#ffffff", // ต้งัค่าสีพ้ืนหลงัเป็นสีขาว
+    backgroundColor: "#888", // ต้งัค่าสีพ้ืนหลงัเป็นสีขาว
     borderRadius: 10, // เพิ่มความมนให้กบัขอบคอนเทนเนอร์
     elevation: 3, // เพิ่มเงาให้กบัคอนเทนเนอร์(เฉพาะ Android)
     width: "100%", // ต้งัความกวา้งของ container ให้เต็มหน้าจอ
