@@ -165,10 +165,55 @@ const stylesFlatlistBackend = StyleSheet.create({
   },
 });
 
+const stylesNews = StyleSheet.create({
+  container: {
+    backgroundColor: "#f0f0f0",
+    padding: 16,
+  },
+  loadingContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  errorContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  errorText: {
+    fontSize: 18,
+    color: "red",
+  },
+  card: {
+    backgroundColor: "#ccc",
+    padding: 16,
+    marginVertical: 8,
+    borderRadius: 10,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 3,
+  },
+  headline: {
+    fontSize: 18,
+    fontWeight: "bold",
+    marginBottom: 8,
+  },
+  date: {
+    fontSize: 14,
+    color: "#888",
+    marginBottom: 8,
+  },
+  description: {
+    fontSize: 16,
+    color: "#333",
+  },
+});
+
 export {
   styles,
   stylesPractice,
   stylesLogin,
   stylesFlatlist,
   stylesFlatlistBackend,
+  stylesNews,
 };
