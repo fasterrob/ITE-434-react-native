@@ -11,29 +11,36 @@ const WeatherApp = () => {
     setSelectedCity(city);
     setIsModalVisible(true);
   };
+
+  const renderWeatherComponent = () => {
+    return selectedCity === "bangkok" ? <WeatherBangkok /> : <WeatherLondon />;
+  };
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Weather App</Text>
-      <Pressable style={styles.button} onPress={() => toggleModal('bangkok')}>
+      <Pressable style={styles.button} onPress={() => toggleModal("bangkok")}>
         <Text style={styles.buttonText}>Bangkok</Text>
       </Pressable>
-      <Pressable style={styles.button} onPress={() => toggleModal('london')}>
+      <Pressable style={styles.button} onPress={() => toggleModal("london")}>
         <Text style={styles.buttonText}>London</Text>
       </Pressable>
 
       <Modal
         animationType="slide"
+        transparent={true}
         visible={isModalVisible}
         onRequestClose={() => setIsModalVisible(!isModalVisible)}
       >
-        <View style={styles.modalContainer}>
-          {selectedCity === "bangkok" ? <WeatherBangkok /> : <WeatherLondon />}
-          <Pressable
-            style={[styles.button, styles.closeButton]}
-            onPress={() => setIsModalVisible(!isModalVisible)}
-          >
-            <Text style={styles.closeButtonText}>Hide Modal</Text>
-          </Pressable>
+        <View style={styles.modalBackground}>
+          <View style={styles.modalContainer}>
+            {renderWeatherComponent()}
+            <Pressable
+              style={[styles.button, styles.closeButton]}
+              onPress={() => setIsModalVisible(!isModalVisible)}
+            >
+              <Text style={styles.closeButtonText}>Hide Modal</Text>
+            </Pressable>
+          </View>
         </View>
       </Modal>
     </View>
@@ -75,7 +82,7 @@ const styles = StyleSheet.create({
   },
   modalContainer: {
     width: "90%",
-    marginHorizontal: "auto",
+    margin: "auto",
     backgroundColor: "#f9f9f9",
     borderRadius: 20,
     padding: 20,

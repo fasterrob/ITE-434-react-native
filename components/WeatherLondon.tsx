@@ -96,7 +96,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 16,
-    paddingTop: 200,
     backgroundColor: "#f5f5f5",
   },
   centeredContainer: {
