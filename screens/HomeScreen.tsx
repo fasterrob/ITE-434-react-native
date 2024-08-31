@@ -1,4 +1,5 @@
 import { Button, StyleSheet, Text, View } from "react-native";
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import React from "react";
 
 const HomeScreen = ({ navigation, route }: any): React.JSX.Element => {
@@ -10,6 +11,7 @@ const HomeScreen = ({ navigation, route }: any): React.JSX.Element => {
   };
   return (
     <View>
+      <Icon name="home" size={40} color="pink" />
       <Text>HomeScreen</Text>
       <Button title="About us" onPress={goToAbout} />
 
@@ -30,24 +32,24 @@ const HomeScreen = ({ navigation, route }: any): React.JSX.Element => {
 export default HomeScreen;
 
 const styles = StyleSheet.create({
-    container: {
-      padding: 20,
-    },
-    header: {
-      fontSize: 24,
-      fontWeight: "bold",
-    },
-    postContainer: {
-      alignItems: "center",
-      justifyContent: "center",
-      marginTop: 50,
-    },
-    postText: {
-      margin: 10,
-      fontSize: 16,
-    },
-    postContent: {
-      color: "blue", // เปลี่ยนสีข้อความที่ถูกส่งกลับมา
-      fontWeight: "bold",
-    },
-  });
+  container: {
+    padding: 20,
+  },
+  header: {
+    fontSize: 24,
+    fontWeight: "bold",
+  },
+  postContainer: {
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 50,
+  },
+  postText: {
+    margin: 10,
+    fontSize: 16,
+  },
+  postContent: {
+    color: "blue", // เปลี่ยนสีข้อความที่ถูกส่งกลับมา
+    fontWeight: "bold",
+  },
+});
