@@ -1,8 +1,39 @@
-import { Button, StyleSheet, Text, View } from "react-native";
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import { Alert, Button, StyleSheet, Text, View } from "react-native";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import React from "react";
+import { useNavigation, useRoute } from "@react-navigation/native";
+import { useLayoutEffect } from "react";
+import AppLogo from "../components/AppLogo";
+import {
+  HeaderButton,
+  HeaderButtons,
+  Item,
+} from "react-navigation-header-buttons";
+import { MaterialIcons } from "@expo/vector-icons";
 
-const HomeScreen = ({ navigation, route }: any): React.JSX.Element => {
+const MaterialHeaderButton = (props: any) => (
+  <HeaderButton IconComponent={MaterialIcons} iconSize={23} {...props} />
+);
+
+const HomeScreen = (): React.JSX.Element => {
+  const navigation = useNavigation<any>();
+  const route = useRoute<any>();
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      title: "หน้าหลัก",
+      headerTitle: () => <AppLogo />,
+      headerTitleAlign: "center",
+      headerLeft: () => (
+        <HeaderButtons HeaderButtonComponent={MaterialHeaderButton}>
+          <Item title="Menu" iconName="menu" onPress={() => {
+            navigation.openDrawer()
+          }} />
+        </HeaderButtons>
+      ),
+    });
+  }, [navigation]);
+
   const goToAbout = () => {
     navigation.navigate("About", {
       companyId: 1,
