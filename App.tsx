@@ -10,6 +10,7 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import MenuScreen from "./screens/MenuScreen";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import ProductScreen from "./screens/ProductScreen";
+import DetailScreen from "./screens/DetailScreen";
 
 const HomeStack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -35,15 +36,11 @@ const HomeStackScreen = () => {
   );
 };
 
-
-
 const ProductStackScreen = () => {
   return (
     <ProductStack.Navigator initialRouteName="Product">
-      <ProductStack.Screen
-        name="Products"
-        component={ProductScreen}
-      />
+      <ProductStack.Screen name="Products" component={ProductScreen} />
+      <ProductStack.Screen name="Detail" component={DetailScreen} />
     </ProductStack.Navigator>
   );
 };

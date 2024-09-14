@@ -2,7 +2,7 @@ import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { Header, Icon, ListItem } from "@rneui/base";
 
-const MenuScreen = (props: any) => {
+const MenuScreen = (props: any): React.JSX.Element => {
   return (
     <View>
       <Header
