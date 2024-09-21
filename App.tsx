@@ -1,6 +1,6 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import React from "react";
+import React, { useState } from "react";
 import HomeScreen from "./screens/HomeScreen";
 import AboutScreen from "./screens/AboutScreen";
 import CreatePostScreen from "./screens/CreatePostScreen";
@@ -11,10 +11,20 @@ import MenuScreen from "./screens/MenuScreen";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import ProductScreen from "./screens/ProductScreen";
 import DetailScreen from "./screens/DetailScreen";
+import LoginScreen from "./screens/LoginScreen";
+import Toast from "react-native-toast-message";
+import { Provider } from "react-redux";
+import { store } from "./redux-toolkit/store";
+
+import { useAppSelector } from "./redux-toolkit/hooks";
+import { selectAuthState } from "./auth/auth-slice";
+import { ActivityIndicator, View } from "react-native";
 
 const HomeStack = createNativeStackNavigator();
-const Drawer = createDrawerNavigator();
 const ProductStack = createNativeStackNavigator();
+const LoginStack = createNativeStackNavigator();
+
+const Drawer = createDrawerNavigator();
 
 const HomeStackScreen = () => {
   return (
@@ -45,26 +55,66 @@ const ProductStackScreen = () => {
   );
 };
 
-const App = (): React.JSX.Element => {
+const LoginStackScreen = () => {
   return (
-    <SafeAreaProvider>
-      <HeaderButtonsProvider stackType="native">
-        <NavigationContainer>
-          <Drawer.Navigator
-            screenOptions={{
-              headerShown: false,
-            }}
-            drawerContent={(props) => <MenuScreen {...props} />}
-          >
-            <Drawer.Screen name="Home" component={HomeStackScreen} />
-            <Drawer.Screen name="About" component={AboutScreen} />
-            <Drawer.Screen name="CreatePost" component={CreatePostScreen} />
-            <Drawer.Screen name="Product" component={ProductStackScreen} />
-          </Drawer.Navigator>
-        </NavigationContainer>
-      </HeaderButtonsProvider>
-    </SafeAreaProvider>
+    <LoginStack.Navigator
+      initialRouteName="Login"
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <LoginStack.Screen name="login" component={LoginScreen} />
+    </LoginStack.Navigator>
   );
 };
 
-export default App;
+const App = (): React.JSX.Element => {
+  const { isLogin, isLoading } = useAppSelector(selectAuthState);
+  // const [isLogin] = useState(false);
+
+  if (isLoading) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <ActivityIndicator size="large" color="blue" />
+      </View>
+    );
+  }
+
+  return (
+    <>
+      <SafeAreaProvider>
+        <HeaderButtonsProvider stackType="native">
+          {isLogin ? (
+            <Drawer.Navigator
+              screenOptions={{
+                headerShown: false,
+              }}
+              drawerContent={(props) => <MenuScreen {...props} />}
+            >
+              <Drawer.Screen name="Home" component={HomeStackScreen} />
+              <Drawer.Screen name="About" component={AboutScreen} />
+              <Drawer.Screen name="CreatePost" component={CreatePostScreen} />
+              <Drawer.Screen name="Product" component={ProductStackScreen} />
+            </Drawer.Navigator>
+          ) : (
+            <LoginStackScreen />
+          )}
+        </HeaderButtonsProvider>
+      </SafeAreaProvider>
+      <Toast />
+    </>
+  );
+};
+
+// export default App;
+
+const AppWrapper = () => {
+  return (
+    <Provider store={store}>
+      <NavigationContainer>
+        <App />
+      </NavigationContainer>
+    </Provider>
+  );
+};
+export default AppWrapper;
