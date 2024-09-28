@@ -82,25 +82,23 @@ const App = (): React.JSX.Element => {
 
   return (
     <>
-      <SafeAreaProvider>
-        <HeaderButtonsProvider stackType="native">
-          {isLogin ? (
-            <Drawer.Navigator
-              screenOptions={{
-                headerShown: false,
-              }}
-              drawerContent={(props) => <MenuScreen {...props} />}
-            >
-              <Drawer.Screen name="Home" component={HomeStackScreen} />
-              <Drawer.Screen name="About" component={AboutScreen} />
-              <Drawer.Screen name="CreatePost" component={CreatePostScreen} />
-              <Drawer.Screen name="Product" component={ProductStackScreen} />
-            </Drawer.Navigator>
-          ) : (
-            <LoginStackScreen />
-          )}
-        </HeaderButtonsProvider>
-      </SafeAreaProvider>
+      <HeaderButtonsProvider stackType="native">
+        {isLogin ? (
+          <Drawer.Navigator
+            screenOptions={{
+              headerShown: false,
+            }}
+            drawerContent={(props) => <MenuScreen {...props} />}
+          >
+            <Drawer.Screen name="Home" component={HomeStackScreen} />
+            <Drawer.Screen name="About" component={AboutScreen} />
+            <Drawer.Screen name="CreatePost" component={CreatePostScreen} />
+            <Drawer.Screen name="Product" component={ProductStackScreen} />
+          </Drawer.Navigator>
+        ) : (
+          <LoginStackScreen />
+        )}
+      </HeaderButtonsProvider>
       <Toast />
     </>
   );
@@ -111,9 +109,11 @@ const App = (): React.JSX.Element => {
 const AppWrapper = () => {
   return (
     <Provider store={store}>
-      <NavigationContainer>
-        <App />
-      </NavigationContainer>
+      <SafeAreaProvider>
+        <NavigationContainer>
+          <App />
+        </NavigationContainer>
+      </SafeAreaProvider>
     </Provider>
   );
 };

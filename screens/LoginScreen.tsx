@@ -1,6 +1,6 @@
 import { View } from "react-native";
-import React from "react";
-import { Text, Card, Input, Button } from "@rneui/base";
+import React, { useState } from "react";
+import { Text, Card, Input, Button, Icon } from "@rneui/base";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { Controller, useForm } from "react-hook-form";
@@ -11,6 +11,8 @@ import { useAppDispatch } from "../redux-toolkit/hooks";
 import { setIsLogin } from "../auth/auth-slice";
 
 const LoginScreen = (): React.JSX.Element => {
+  const [showPassword, setShowPassword] = useState(false);
+
   const dispatch = useAppDispatch();
 
   const schema = yup.object().shape({
@@ -92,8 +94,16 @@ const LoginScreen = (): React.JSX.Element => {
           render={({ field: { onBlur, onChange, value } }) => (
             <Input
               placeholder="Password"
-              leftIcon={{ name: "password" }}
-              keyboardType="number-pad"
+              leftIcon={{ name: "key" }}
+              rightIcon={
+                <Icon
+                  name={showPassword ? "eye" : "eye-off"}
+                  type="feather"
+                  onPress={() => setShowPassword(!showPassword)}
+                />
+              }
+              secureTextEntry={!showPassword}
+              keyboardType="default"
               onBlur={onBlur}
               onChangeText={onChange}
               value={value}
