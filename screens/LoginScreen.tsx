@@ -7,8 +7,12 @@ import { Controller, useForm } from "react-hook-form";
 import { login } from "../services/auth-service";
 import { AxiosError } from "axios";
 import Toast from "react-native-toast-message";
+import { useAppDispatch } from "../redux-toolkit/hooks";
+import { setIsLogin } from "../auth/auth-slice";
 
 const LoginScreen = (): React.JSX.Element => {
+  const dispatch = useAppDispatch();
+
   const schema = yup.object().shape({
     email: yup
       .string()
@@ -35,6 +39,7 @@ const LoginScreen = (): React.JSX.Element => {
       //status 200 >> Success​
 
       if (response.status === 200) {
+        dispatch(setIsLogin(true));
         Toast.show({ type: "success", text1: "Login Success" });
         //ถ้ากรอกอีเมลและรหัสผ่านถูกต้องจะแสดงข้อความ login success ที่ terminal​
 
