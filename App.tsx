@@ -1,6 +1,6 @@
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, useFocusEffect } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import HomeScreen from "./screens/HomeScreen";
 import AboutScreen from "./screens/AboutScreen";
 import CreatePostScreen from "./screens/CreatePostScreen";
@@ -16,9 +16,15 @@ import Toast from "react-native-toast-message";
 import { Provider } from "react-redux";
 import { store } from "./redux-toolkit/store";
 
-import { useAppSelector } from "./redux-toolkit/hooks";
-import { selectAuthState } from "./auth/auth-slice";
+import { useAppSelector, useAppDispatch } from "./redux-toolkit/hooks";
+import {
+  selectAuthState,
+  setIsLoading,
+  setIsLogin,
+  setProfile,
+} from "./auth/auth-slice";
 import { ActivityIndicator, View } from "react-native";
+import { getProfile } from "./services/auth-service";
 
 const HomeStack = createNativeStackNavigator();
 const ProductStack = createNativeStackNavigator();
@@ -70,7 +76,30 @@ const LoginStackScreen = () => {
 
 const App = (): React.JSX.Element => {
   const { isLogin, isLoading } = useAppSelector(selectAuthState);
-  // const [isLogin] = useState(false);
+  const dispatch = useAppDispatch();
+
+  const checkLogin = async () => {
+    try {
+      dispatch(setIsLoading(true));
+      const res = await getProfile();
+      if (res?.data.data.user) {
+        dispatch(setProfile(res.data.data.user));
+        dispatch(setIsLogin(true));
+      } else {
+        dispatch(setIsLogin(false));
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      dispatch(setIsLoading(false));
+    }
+  };
+
+  useFocusEffect(
+    useCallback(() => {
+      checkLogin();
+    }, [])
+  );
 
   if (isLoading) {
     return (

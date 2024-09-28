@@ -1,4 +1,4 @@
-import { Alert, Button, StyleSheet, Text, View } from "react-native";
+import { Alert, Button, StyleSheet, View } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import React from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
@@ -10,6 +10,11 @@ import {
   Item,
 } from "react-navigation-header-buttons";
 import { MaterialIcons } from "@expo/vector-icons";
+import { Text } from "@rneui/base";
+
+import { useAppDispatch, useAppSelector } from "../redux-toolkit/hooks";
+import { logout } from "../services/auth-service";
+import { selectAuthState, setIsLogin } from "../auth/auth-slice";
 
 const MaterialHeaderButton = (props: any) => (
   <HeaderButton IconComponent={MaterialIcons} iconSize={23} {...props} />
@@ -19,6 +24,10 @@ const HomeScreen = (): React.JSX.Element => {
   const navigation = useNavigation<any>();
   const route = useRoute<any>();
 
+  const dispatch = useAppDispatch();
+
+  const { profile } = useAppSelector(selectAuthState);
+
   useLayoutEffect(() => {
     navigation.setOptions({
       title: "หน้าหลัก",
@@ -26,9 +35,25 @@ const HomeScreen = (): React.JSX.Element => {
       headerTitleAlign: "center",
       headerLeft: () => (
         <HeaderButtons HeaderButtonComponent={MaterialHeaderButton}>
-          <Item title="Menu" iconName="menu" onPress={() => {
-            navigation.openDrawer()
-          }} />
+          <Item
+            title="Menu"
+            iconName="menu"
+            onPress={() => {
+              navigation.openDrawer();
+            }}
+          />
+        </HeaderButtons>
+      ),
+      headerRight: () => (
+        <HeaderButtons HeaderButtonComponent={MaterialHeaderButton}>
+          <Item
+            title="logout"
+            iconName="logout"
+            onPress={async () => {
+              await logout();
+              dispatch(setIsLogin(false));
+            }}
+          />
         </HeaderButtons>
       ),
     });
@@ -41,21 +66,17 @@ const HomeScreen = (): React.JSX.Element => {
     });
   };
   return (
-    <View>
-      <Icon name="home" size={40} color="pink" />
-      <Text>HomeScreen</Text>
+    <View style={styles.container}>
+      <MaterialIcons name="home" size={40} color="pink" />
+      {profile ? (
+        <>
+          <Text h3>Welcome {profile.name}</Text>
+          <Text>
+            Email: {profile.email} ID: {profile.id} Role: {profile.role}
+          </Text>
+        </>
+      ) : null}
       <Button title="About us" onPress={goToAbout} />
-
-      <View style={styles.postContainer}>
-        <Button
-          title="Create post"
-          onPress={() => navigation.navigate("CreatePost")}
-        />
-        <Text style={styles.postText}>
-          Post:
-          <Text style={styles.postContent}> {route.params?.post}</Text>
-        </Text>
-      </View>
     </View>
   );
 };
