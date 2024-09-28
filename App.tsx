@@ -25,12 +25,51 @@ import {
 } from "./auth/auth-slice";
 import { ActivityIndicator, View } from "react-native";
 import { getProfile } from "./services/auth-service";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import CameraScreen from "./screens/CameraScreen";
+import Ionicons from "react-native-vector-icons/Ionicons";
 
 const HomeStack = createNativeStackNavigator();
 const ProductStack = createNativeStackNavigator();
 const LoginStack = createNativeStackNavigator();
+const CameraStack = createNativeStackNavigator();
 
 const Drawer = createDrawerNavigator();
+
+const Tab = createBottomTabNavigator();
+
+const TabContainer = () => {
+  return (
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName = "";
+          if (route.name === "HomeStack") {
+            iconName = focused ? "home" : "home-outline";
+          } else if (route.name === "CameraStack") {
+            iconName = focused ? "camera" : "camera-outline";
+          }
+          return <Ionicons name={iconName} size={size} color={color} />;
+        },
+        tabBarActiveTintColor: "tomato",
+        tabBarInactiveTintColor: "gray",
+        headerShown: false,
+        tabBarActiveBackgroundColor: "lightblue",
+      })}
+    >
+      <Tab.Screen
+        name="HomeStack"
+        component={HomeStackScreen}
+        options={{ tabBarLabel: "หน้าหลัก" }}
+      />
+      <Tab.Screen
+        name="CameraStack"
+        component={CameraStackScreen}
+        options={{ tabBarLabel: "กล้อง" }}
+      />
+    </Tab.Navigator>
+  );
+};
 
 const HomeStackScreen = () => {
   return (
@@ -71,6 +110,23 @@ const LoginStackScreen = () => {
     >
       <LoginStack.Screen name="login" component={LoginScreen} />
     </LoginStack.Navigator>
+  );
+};
+
+const CameraStackScreen = () => {
+  return (
+    <CameraStack.Navigator
+      initialRouteName="Camera"
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <CameraStack.Screen
+        name="Camera"
+        component={CameraScreen}
+        options={{ title: "Camera" }}
+      />
+    </CameraStack.Navigator>
   );
 };
 
@@ -119,9 +175,7 @@ const App = (): React.JSX.Element => {
             }}
             drawerContent={(props) => <MenuScreen {...props} />}
           >
-            <Drawer.Screen name="Home" component={HomeStackScreen} />
-            <Drawer.Screen name="About" component={AboutScreen} />
-            <Drawer.Screen name="CreatePost" component={CreatePostScreen} />
+            <Drawer.Screen name="Home" component={TabContainer} />
             <Drawer.Screen name="Product" component={ProductStackScreen} />
           </Drawer.Navigator>
         ) : (
